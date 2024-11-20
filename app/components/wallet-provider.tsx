@@ -8,6 +8,7 @@ import {
 import { WagmiProvider } from 'wagmi';
 import {
   base,
+  baseSepolia,
 } from 'wagmi/chains';
 import {
   QueryClientProvider,
@@ -17,7 +18,7 @@ import {
 const config = getDefaultConfig({
     appName: 'Gamble',
     projectId: '4fb0557863f2531efa49874a6ab539f7',
-    chains: [base],
+    chains: [base, baseSepolia],
     ssr: true, 
   });
 

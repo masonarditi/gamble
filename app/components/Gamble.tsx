@@ -123,19 +123,29 @@ export function Gamble() {
       })
 
     const { writeContract } = useWriteContract();
+    const [message, setMessage] = useState("");
+
 async function Bet(values: z.infer<typeof formSchema>) {
-    await writeContract({
-      address: contractAddress,
-      abi: contractABI,
-      functionName: "bet",
-      args: [values.count],
-    });
-  }
+    try {
+        const result = await writeContract({
+            address: contractAddress,
+            abi: contractABI,
+            functionName: "bet",
+            args: [values.count],
+        });
+        console.log("Transaction successful:", result);
+        setMessage("Bet Placed");
+    } catch (error) {
+        console.error("Transaction failed:", error);
+        setMessage("Bet Failed");
+    }
+}
   return (
 
     <div className="flex flex-col items-center justify-center">
     
     <p className="text-2xl font-bold mt-10">Balance:</p>
+    {message && <p className="text-green-500">{message}</p>}
 
     <div className="flex space-x-4 mt-4">
     <SetBalance />
