@@ -19,7 +19,7 @@ import { useWriteContract } from "wagmi";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SetBalance } from "./setBalance";
 
 const contractABI = [
@@ -151,7 +151,7 @@ export function Gamble() {
 
     <Dialog>
       <DialogTrigger asChild>
-        <Button>What's Your Bet?</Button>
+        <Button>What is Your Bet?</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
