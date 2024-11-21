@@ -107,7 +107,7 @@ const contractABI = [
     }
   ];
 
-const contractAddress = '0xdc8fd0a4e818c6e1a82af53d7ef8affd411e92e8';
+const contractAddress = '0xbb2F1d731Fa5FDaE16f6AFd9f5434F2aF98d4163';
 
 const formSchema = z.object({
     count: z
@@ -124,28 +124,27 @@ export function Gamble() {
 
     const { writeContract } = useWriteContract();
     const [message, setMessage] = useState("");
-
-async function Bet(values: z.infer<typeof formSchema>) {
-    try {
-        const result = await writeContract({
-            address: contractAddress,
-            abi: contractABI,
-            functionName: "bet",
-            args: [values.count],
-        });
-        console.log("Transaction successful:", result);
-        setMessage("Bet Placed");
-    } catch (error) {
-        console.error("Transaction failed:", error);
-        setMessage("Bet Failed");
+    
+    async function Bet(values: z.infer<typeof formSchema>) {
+        try {
+            const result = await writeContract({
+                address: contractAddress,
+                abi: contractABI,
+                functionName: "bet",
+                args: [values.count],
+            });
+            console.log("Transaction successful:", result);
+            setMessage("Bet Placed");
+        } catch (error) {
+            console.error("Transaction failed:", error);
+            setMessage("Bet Failed");
+        }
     }
-}
   return (
 
     <div className="flex flex-col items-center justify-center">
     
     <p className="text-2xl font-bold mt-10">Balance:</p>
-    {message && <p className="text-green-500">{message}</p>}
 
     <div className="flex space-x-4 mt-4">
     <SetBalance />

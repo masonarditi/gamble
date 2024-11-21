@@ -89,7 +89,7 @@ const contractABI = [
     }
   ];
   
-  const contractAddress = '0xdc8fd0a4e818c6e1a82af53d7ef8affd411e92e8';
+  const contractAddress = '0xbb2F1d731Fa5FDaE16f6AFd9f5434F2aF98d4163';
 
 const formSchema = z.object({
     count: z
@@ -105,14 +105,17 @@ export function SetBalance() {
     const { writeContract } = useWriteContract();
 
     async function handleSetBalance() {
-
-        const defaultCount = 1; 
-        await writeContract({
-            address: contractAddress,
-            abi: contractABI,
-            functionName: "setBalance",
-            args: [defaultCount],
-        });
+        try {
+            const result = await writeContract({
+                address: contractAddress,
+                abi: contractABI,
+                functionName: "setBalance",
+                args: [],
+            });
+            console.log("Balance set successfully:", result);
+        } catch (error) {
+            console.error("Failed to set balance:", error);
+        }
     }
 
     return (
